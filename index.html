@@ -27,35 +27,24 @@
 
      <div id="g1"></div>
      <script>
-          const xSize = 500;
-          const ySize = 500;
-          const margin = 40;
-          const xMax = xSize - margin*2;
-          const yMax = ySize - margin*2;
+          // d3.csv("data/wec.csv").then(function (data) => {
 
-          const svg = d3.select("#g1")
-            .append("svg")
-            .append("g")
-            .attr("transform","translate(" + margin + "," + margin + ")");
-          
-          d3.csv("data/wec.csv").then(function (data) => {
-
-               function convertToLongFormat(data) {
-                 // Extract years (column names) except 'Country'
-                 const years = Object.keys(data[0]).filter(key => key !== 'Country');
+          //      function convertToLongFormat(data) {
+          //        // Extract years (column names) except 'Country'
+          //        const years = Object.keys(data[0]).filter(key => key !== 'Country');
                  
-                 // Convert to long format
-                 const longData = data.flatMap(d => 
-                     years.map(year => ({
-                         Country: d.Country,
-                         Year: +year, // Convert year to a number
-                         Value: d[year]
-                     }))
-                 );
+          //        // Convert to long format
+          //        const longData = data.flatMap(d => 
+          //            years.map(year => ({
+          //                Country: d.Country,
+          //                Year: +year, // Convert year to a number
+          //                Value: d[year]
+          //            }))
+          //        );
                  
-                 return longData;
-             }
-     
+          //        return longData;
+          //    }
+               
                const width = 800;
              const height = 400;
              const margin = {top: 20, right: 30, bottom: 30, left: 40};
@@ -67,60 +56,60 @@
                  .append("g")
                  .attr("transform", `translate(${margin.left},${margin.top})`);
      
-             // Set up scales
-             const xScale = d3.scaleLinear()
-                 .domain(d3.extent(longData, d => d.Year))
-                 .range([0, width - margin.left - margin.right]);
+             // // Set up scales
+             // const xScale = d3.scaleLinear()
+             //     .domain(d3.extent(longData, d => d.Year))
+             //     .range([0, width - margin.left - margin.right]);
      
-             const yScale = d3.scaleLinear()
-                 .domain([0, d3.max(longData, d => d.Value)])
-                 .nice()
-                 .range([height - margin.top - margin.bottom, 0]);
+             // const yScale = d3.scaleLinear()
+             //     .domain([0, d3.max(longData, d => d.Value)])
+             //     .nice()
+             //     .range([height - margin.top - margin.bottom, 0]);
      
-             // Set up line generator
-             const line = d3.line()
-                 .x(d => xScale(d.Year))
-                 .y(d => yScale(d.Value));
+             // // Set up line generator
+             // const line = d3.line()
+             //     .x(d => xScale(d.Year))
+             //     .y(d => yScale(d.Value));
      
-             // Group data by country
-             const countries = d3.group(longData, d => d.Country);
+             // // Group data by country
+             // const countries = d3.group(longData, d => d.Country);
      
-             // Add lines
-             countries.forEach(([country, data]) => {
-                 svg.append("path")
-                     .datum(data)
-                     .attr("class", "line")
-                     .attr("d", line)
-                     .style("stroke", country === "USA" ? "blue" : "red") // Set color for each country
-                     .attr("stroke-width", 2)
-                     .attr("fill", "none");
-             });
+             // // Add lines
+             // countries.forEach(([country, data]) => {
+             //     svg.append("path")
+             //         .datum(data)
+             //         .attr("class", "line")
+             //         .attr("d", line)
+             //         .style("stroke", country === "USA" ? "blue" : "red") // Set color for each country
+             //         .attr("stroke-width", 2)
+             //         .attr("fill", "none");
+             // });
      
-             // Add X and Y axes
-             svg.append("g")
-                 .attr("transform", `translate(0,${height - margin.top - margin.bottom})`)
-                 .call(d3.axisBottom(xScale).ticks(5).tickFormat(d3.format("d")))
-                 .append("text")
-                 .attr("x", width - margin.left - margin.right)
-                 .attr("y", -6)
-                 .attr("fill", "#000")
-                 .attr("class", "axis-label")
-                 .attr("text-anchor", "end")
-                 .text("Year");
+             // // Add X and Y axes
+             // svg.append("g")
+             //     .attr("transform", `translate(0,${height - margin.top - margin.bottom})`)
+             //     .call(d3.axisBottom(xScale).ticks(5).tickFormat(d3.format("d")))
+             //     .append("text")
+             //     .attr("x", width - margin.left - margin.right)
+             //     .attr("y", -6)
+             //     .attr("fill", "#000")
+             //     .attr("class", "axis-label")
+             //     .attr("text-anchor", "end")
+             //     .text("Year");
      
-             svg.append("g")
-                 .call(d3.axisLeft(yScale))
-                 .append("text")
-                 .attr("x", 6)
-                 .attr("y", 6)
-                 .attr("dy", ".71em")
-                 .attr("fill", "#000")
-                 .attr("class", "axis-label")
-                 .attr("text-anchor", "end")
-                 .text("Value");
+             // svg.append("g")
+             //     .call(d3.axisLeft(yScale))
+             //     .append("text")
+             //     .attr("x", 6)
+             //     .attr("y", 6)
+             //     .attr("dy", ".71em")
+             //     .attr("fill", "#000")
+             //     .attr("class", "axis-label")
+             //     .attr("text-anchor", "end")
+             //     .text("Value");
      
-             // Convert data
-             const longData = convertToLongFormat(wideData);
+             // // Convert data
+             // const longData = convertToLongFormat(wideData);
           });
           
            
