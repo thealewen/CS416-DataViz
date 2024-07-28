@@ -28,90 +28,21 @@
      <div id="g1"></div>
      <script>
           <svg width="960" height="500"></svg>
-          // Set up dimensions and margins
-          const margin = { top: 20, right: 30, bottom: 50, left: 60 };
-          const width = 960 - margin.left - margin.right;
-          const height = 500 - margin.top - margin.bottom;
-          
-          const svg = d3.select("svg")
-              .attr("width", width + margin.left + margin.right)
-              .attr("height", height + margin.top + margin.bottom)
-              .append("g")
-              .attr("transform", `translate(${margin.left},${margin.top})`);
-          
-          // Load the data
-          d3.csv("data/wec.csv").then(data => {
-              // Convert the data from wide to long format
-              const years = d3.keys(data[0]).filter(key => key !== 'country');
-              
-              const longData = data.flatMap(d => 
-                  years.map(year => ({
-                      country: d.country,
-                      year: +year,
-                      energy: +d[year]
-                  }))
-              );
-          
-              // Parse years for the x-axis
-              const xScale = d3.scaleTime()
-                  .domain(d3.extent(longData, d => new Date(d.year, 0, 1)))
-                  .range([0, width]);
-          
-              const yScale = d3.scaleLinear()
-                  .domain([0, d3.max(longData, d => d.energy)])
-                  .nice()
-                  .range([height, 0]);
-          
-              // Define the line function
-              const line = d3.line()
-                  .x(d => xScale(new Date(d.year, 0, 1)))
-                  .y(d => yScale(d.energy));
-          
-              // Group data by country
-              const countries = Array.from(new Set(longData.map(d => d.country)));
-          
-              // Draw the lines
-              countries.forEach(country => {
-                  const countryData = longData.filter(d => d.country === country);
-          
-                  svg.append("path")
-                      .datum(countryData)
-                      .attr("fill", "none")
-                      .attr("stroke", () => d3.schemeCategory10[countries.indexOf(country) % 10])
-                      .attr("class", "line")
-                      .attr("d", line);
-              });
-          
-              // Add the X Axis
-              svg.append("g")
-                  .attr("transform", `translate(0,${height})`)
-                  .call(d3.axisBottom(xScale).ticks(d3.timeYear.every(1)));
-          
-              // Add the Y Axis
-              svg.append("g")
-                  .call(d3.axisLeft(yScale));
-          
-              // Add a legend
-              const legend = svg.append("g")
-                  .attr("class", "legend")
-                  .attr("transform", `translate(${width - 150}, 20)`);
-          
-              countries.forEach((country, i) => {
-                  legend.append("rect")
-                      .attr("x", 0)
-                      .attr("y", i * 20)
-                      .attr("width", 10)
-                      .attr("height", 10)
-                      .attr("fill", d3.schemeCategory10[i % 10]);
-          
-                  legend.append("text")
-                      .attr("x", 20)
-                      .attr("y", i * 20 + 10)
-                      .text(country);
-              });
-          }).catch(error => {
-              console.error('Error loading or parsing data.', error);
+          var data = await d3.csv("data/wec.csv");
+
+          d3.csv(d3.csv, data, function(wide_data) {
+               var long_data = [];
+               wide_data.forEach( function(row) {
+               // Loop through all of the columns, and for each column
+               // make a new row
+               Object.keys(row).forEach( function(colname) {
+               if(colname == "Country" || colname == "Value") {
+                  return
+                }
+                long_data.push({"Country": row["Country"], "Value": row[colname], "Year": colname});
+               });
           });
+          
      
            
      </script>
