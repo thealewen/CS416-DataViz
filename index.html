@@ -27,8 +27,18 @@
 
      <div id="g1"></div>
      <script>
-          <svg width="960" height="500"></svg>
-          d3.csv("data/wec.csv").then(data => {
+          const xSize = 500;
+          const ySize = 500;
+          const margin = 40;
+          const xMax = xSize - margin*2;
+          const yMax = ySize - margin*2;
+
+          const svg = d3.select("#g1")
+            .append("svg")
+            .append("g")
+            .attr("transform","translate(" + margin + "," + margin + ")");
+          
+          d3.csv("data/wec.csv").then(function (data) => {
 
                function convertToLongFormat(data) {
                  // Extract years (column names) except 'Country'
