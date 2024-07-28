@@ -25,6 +25,7 @@
      <button onclick=“europe()“> Europe </button>
      <button onclick=“asiapac()“> Asia Pacific </button>
 
+     <div id="g1"></div>
      <script>
           // set the dimensions and margins of the graph
      const margin = {top: 10, right: 30, bottom: 30, left: 60},
@@ -32,7 +33,7 @@
          height = 400 - margin.top - margin.bottom;
      
      // append the svg object to the body of the page
-     const svg = d3.select("#my_dataviz")
+     const svg = d3.select("#g1")
        .append("svg")
          .attr("width", width + margin.left + margin.right)
          .attr("height", height + margin.top + margin.bottom)
