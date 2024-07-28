@@ -18,8 +18,33 @@
      </div>
 
      <script>
-          var data = await d3.csv("data/wec.csv");
-          display(data)
+           // Sample data
+           const data = [10, 20, 30, 40, 50];
+          // Create SVG container
+           const svg = d3.select("#chart")
+           .append("svg")
+           .attr("width", 400)
+           .attr("height", 200);
+          // Create bars
+           svg.selectAll("rect")
+           .data(data)
+           .enter()
+           .append("rect")
+           .attr("x", (d, i) => i * 50)
+           .attr("y", (d) => 200 - d * 2)
+           .attr("width", 40)
+           .attr("height", (d) => d * 2)
+           .attr("fill", "steelblue");
+          // Add text labels
+           svg.selectAll("text")
+           .data(data)
+           .enter()
+           .append("text")
+           .text((d) => d)
+           .attr("x", (d, i) => i * 50 + 15)
+           .attr("y", (d) => 200 - d * 2 + 20)
+           .attr("fill", "white")
+           .style("text-anchor", "middle");
      </script>
 
 
