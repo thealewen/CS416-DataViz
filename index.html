@@ -40,7 +40,7 @@
               .attr("transform", `translate(${margin.left},${margin.top})`);
           
           // Load the data
-          d3.csv("data.csv").then(data => {
+          d3.csv("data/wec.csv").then(data => {
               // Convert the data from wide to long format
               const years = d3.keys(data[0]).filter(key => key !== 'country');
               
