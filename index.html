@@ -28,26 +28,29 @@
      <div id="g1"></div>
      <svg width=500 height=500></svg>
      <script>
-          d3.csv("data/wec.csv", function(data) {
-              console.log(data);
-          });
-          // d3.csv("data/wec.csv").then(function (data) => {
+          // d3.csv("data/wec.csv", function(data) {
+          //     console.log(data);
+          // });
+          d3.csv("data/wec.csv").then(function (data) => {
 
-          //      function convertToLongFormat(data) {
-          //        // Extract years (column names) except 'Country'
-          //        const years = Object.keys(data[0]).filter(key => key !== 'Country');
+               function convertToLongFormat(data) {
+                 // Extract years (column names) except 'Country'
+                 const years = Object.keys(data[0]).filter(key => key !== 'Country');
                  
-          //        // Convert to long format
-          //        const longData = data.flatMap(d => 
-          //            years.map(year => ({
-          //                Country: d.Country,
-          //                Year: +year, // Convert year to a number
-          //                Value: d[year]
-          //            }))
-          //        );
+                 // Convert to long format
+                 const longData = data.flatMap(d => 
+                     years.map(year => ({
+                         Country: d.Country,
+                         Year: +year, // Convert year to a number
+                         Value: d[year]
+                     }))
+                 );
                  
-          //        return longData;
-          //    }
+                 return longData;
+             }
+          for (var i = 0; i < data.length; i++) {
+             d3.select("g1").append(data[i].Name);
+         }
           // set the dimensions and margins of the graph
      
      // append the svg object to the body of the page
