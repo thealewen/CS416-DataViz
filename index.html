@@ -28,7 +28,7 @@
      <div id="g1"></div>
      <script>
           <svg width="960" height="500"></svg>
-          var data = await d3.transpose(d3.csv("data/wec.csv"));
+          var data = await d3.csv("data/wec.csv");
 
           function convertToLongFormat(data) {
             // Extract years (column names) except 'Country'
