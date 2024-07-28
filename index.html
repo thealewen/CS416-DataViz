@@ -5,6 +5,10 @@
      <title>Narrative of World Energy Consumption</title>
      
      <script src='https://d3js.org/d3.v4.min.js'></script>
+
+     <style>
+          body {background-color: lightgreen;}
+     </style>
  
 </head>
 
@@ -12,6 +16,14 @@
      <div id='title'>
           <h1 style="text-align:center">World Energy Consumption throughout 1965-2023</h1>
      </div>
+
+     <script>
+          var data = await d3.csv("data/wec.csv");
+          display(data)
+     </script>
+
+
+     
      <div id='source'>
           <p>
                Data Source: <a href="https://www.kaggle.com/datasets/patricklford/world-energy-consumption">Kaggle</a>
