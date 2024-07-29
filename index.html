@@ -45,6 +45,10 @@
                    .attr("r", d => 2 + +d["EngineCylinders"]);
 
           }
+          var svg = d3.select("body")
+              .append("svg")
+              .attr("width", 300)
+              .attr("height", 300);
 
           const annotations = [
             {
@@ -64,11 +68,6 @@
             .annotations(annotations);
           svg.append("g")
             .call(makeAnnotations);
-
-          var svg = d3.select("body")
-              .append("svg")
-              .attr("width", 300)
-              .attr("height", 300);
           
           svg.append("circle").attr("r", 130).attr("cx", 150).attr("cy", 150)
                .transition().attr("r",10).attr("cx",150).style("fill","blue");
