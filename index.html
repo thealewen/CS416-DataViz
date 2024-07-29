@@ -10,6 +10,7 @@
 
 <style>
      body {background-color: lightgreen;}
+     circle {fill: lightblue; stroke: black;}
 </style>
 
 <body onload='init()'>
@@ -28,6 +29,22 @@
      <div id="g1"></div>
      <svg width=500 height=500></svg>
      <script>
+          async function init() {
+               var data = await d3.csv("https://flunky.github.io/cars2017.csv");
+               var svg = d3.select("svg").append("g").attr("transform", "translate(50,50)");
+
+               var xScale = d3.scaleLog().domain([10, 150]).range([0, 200]);
+               var yScale = d3.scaleLog().domain([10, 150]).range([200, 0]);
+
+               svg.selectAll("circle")
+                   .data(data)
+                   .enter()
+                   .append("circle")
+                   .attr("cx", d => xScale(d["AverageCityMPG"]))
+                   .attr("cy", d => yScale(d["AverageHighwayMPG"]))
+                   .attr("r", d => 2 + +d["EngineCylinders"]);
+
+          }
      //      async function init() {
      //           var data =  d3.csv('data/wec.csv');
 
