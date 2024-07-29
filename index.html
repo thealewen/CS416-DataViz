@@ -49,25 +49,6 @@
               .append("svg")
               .attr("width", 300)
               .attr("height", 300);
-
-          const annotations = [
-            {
-              note: {
-                label: "Here is the annotation label",
-                title: "Annotation title"
-              },
-              x: 100,
-              y: 100,
-              dy: 100,
-              dx: 100
-            }
-          ];
-          
-          // Add annotation to the chart
-          const makeAnnotations = d3.annotation()
-            .annotations(annotations);
-          svg.append("g")
-            .call(makeAnnotations);
           
           svg.append("circle").attr("r", 130).attr("cx", 150).attr("cy", 150)
                .transition().attr("r",10).attr("cx",150).style("fill","blue");
