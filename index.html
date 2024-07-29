@@ -45,116 +45,30 @@
                    .attr("r", d => 2 + +d["EngineCylinders"]);
 
           }
-     //      async function init() {
-     //           var data =  d3.csv('data/wec.csv');
 
-     //      }
-     //      // d3.csv('data/wec.csv').then(data => {
-     //      //   const countriesOfInterest = ['Total North America', 'Total S. & Cent. America', 'Total Europe', 'Total CIS', 'Total Middle East', 'Total Africa','Total Asia Pacific'];
-
-     //      //   // Function to get values for a specific country
-     //      //   function getValuesForCountry(country) {
-     //      //       const countryData = data.find(row => row.Country === country);
-     //      //       if (countryData) {
-     //      //           // Remove the country name from the data object
-     //      //           const { Country, ...values } = countryData;
-     //      //           return Object.values(values);
-     //      //       } else {
-     //      //           return [];
-     //      //       }
-     //      //   }
-
-     //      //      let na = getValuesForCountry('Total North America');
-     //      //      let cs = getValuesForCountry('Total S. & Cent. America');
-     //      //      let af = getValuesForCountry('Total Europe');
-     //      //      let ap = getValuesForCountry('Total Asia Pacific');
-     //      //      let me = getValuesForCountry('Total Middle East');
-     //      //      let e = getValuesForCountry('Total Europe');
-     //      //      let cis = getValuesForCountry('Total CIS',);
+          const annotations = [
+            {
+              note: {
+                label: "Here is the annotation label",
+                title: "Annotation title"
+              },
+              x: 100,
+              y: 100,
+              dy: 100,
+              dx: 100
+            }
+          ];
           
-     //      //   // Get values for each country of interest
-     //      //   countriesOfInterest.forEach(country => {
-     //      //       const values = getValuesForCountry(country);
-     //      //       console.log(`Values for ${country}:`, values);
-     //      //   });
-     //      // set the dimensions and margins of the graph
-     
-     // // append the svg object to the body of the page
-     //   //    const svg = d3.select("#g1")
-     //   // .append("svg")
-     //   //   .attr("width", width + margin.left + margin.right)
-     //   //   .attr("height", height + margin.top + margin.bottom)
-     //   // .append("g")
-     //   //   .attr("transform", `translate(${margin.left},${margin.top})`);
-     
-     //         // Set up scales
-     //         const xScale = d3.scaleLinear()
-     //             .domain(d3.extent(longData, d => d.Year))
-     //             .range([0, width - margin.left - margin.right]);
-     
-     //         const yScale = d3.scaleLinear()
-     //             .domain([0, d3.max(longData, d => d.Value)])
-     //             .nice()
-     //             .range([height - margin.top - margin.bottom, 0]);
+          // Add annotation to the chart
+          const makeAnnotations = d3.annotation()
+            .annotations(annotations);
+          svg.append("g")
+            .call(makeAnnotations);
 
-     //           const xAxis = d3.axisBottom(xScale)
-     //          .tickFormat(d3.format("~s"));
-          
-     //           const yAxis = d3.axisLeft(yScale)
-     //           .tickFormat(d3.format("~s"));
-
-     //           d3.select("svg").append("g").attr("transform", "translate(0,500)").call(xAxis);
-     //           d3.select("svg").append("g").attr("transform", "translate(500,0)").call(yAxis);
-     
-     //         // Set up line generator
-     //         const line = d3.line()
-     //             .x(d => xScale(d.Year))
-     //             .y(d => yScale(d.Value));
-     
-     //         // // Group data by country
-     //         const countries = d3.group(longData, d => d.Country);
-     
-     //         // Add lines
-     //         countries.forEach(([country, data]) => {
-     //             svg.append("path")
-     //                 .datum(data)
-     //                 .attr("class", "line")
-     //                 .attr("d", line)
-     //                 .style("stroke", country === "USA" ? "blue" : "red") // Set color for each country
-     //                 .attr("stroke-width", 2)
-     //                 .attr("fill", "none");
-     //         });
-     
-     //         // Add X and Y axes
-     //         svg.append("g")
-     //             .attr("transform", `translate(0,${height - margin.top - margin.bottom})`)
-     //             .call(d3.axisBottom(xScale).ticks(5).tickFormat(d3.format("d")))
-     //             .append("text")
-     //             .attr("x", width - margin.left - margin.right)
-     //             .attr("y", -6)
-     //             .attr("fill", "#000")
-     //             .attr("class", "axis-label")
-     //             .attr("text-anchor", "end")
-     //             .text("Year");
-     
-     //         svg.append("g")
-     //             .call(d3.axisLeft(yScale))
-     //             .append("text")
-     //             .attr("x", 6)
-     //             .attr("y", 6)
-     //             .attr("dy", ".71em")
-     //             .attr("fill", "#000")
-     //             .attr("class", "axis-label")
-     //             .attr("text-anchor", "end")
-     //             .text("Value");
-     
-     //         // // Convert data
-     //         // const longData = convertToLongFormat(wideData);
-     //      });
           var svg = d3.select("body")
               .append("svg")
               .attr("width", 300)
-              .attr("height", 300)
+              .attr("height", 300);
           
           svg.append("circle").attr("r", 130).attr("cx", 150).attr("cy", 150)
                .transition().attr("r",10).attr("cx",150).style("fill","blue");
