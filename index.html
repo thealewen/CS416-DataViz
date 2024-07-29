@@ -17,8 +17,8 @@
           <h1 style="text-align:center">World Energy Consumption throughout 1965-2023</h1>
      </div>
 
-     <button onclick=“world()“> The Whole World </button>
-     <button onclick=“america()“> America </button>
+     <button onclick=“index.html“> The Whole World </button>
+     <button onclick=“a.html“> America </button>
      <button onclick=“africa()“> Africa </button>
      <button onclick=“mideast()“> Middle East </button>
      <button onclick=“cis()“> CIS </button>
@@ -140,6 +140,7 @@
               .attr("height", 300)
           
           svg.append("circle").attr("r", 130).attr("cx", 150).attr("cy", 150)
+               .transition().attr("r",10).attr("cx",150).style("fill","blue");
            
      </script>
 
